@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_one_attached :profile_image
    has_many :favorites, dependent: :destroy
+   has_many :book_comments, dependent: :destroy
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 } 
@@ -19,4 +20,9 @@ class User < ApplicationRecord
      end
         profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+  
 end
