@@ -6,4 +6,4 @@ class BookCommentsController < ApplicationController
     comment.book_id = book.id
     comment.save
     redirect_to book_path(book)
-end
+    end
